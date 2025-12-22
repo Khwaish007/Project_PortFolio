@@ -194,6 +194,26 @@ Frontend: https://your-frontend-url.vercel.app
 
 ## 🔧 TROUBLESHOOTING
 
+### Issue: "Page not found (404) on reload"
+**Fix:** Make sure Frontend has `vercel.json` with rewrites:
+1. Check that `Frontend/vercel.json` exists
+2. It should contain rewrites configuration for SPA routing
+3. Redeploy frontend after adding the file
+
+### Issue: "Images not loading from Cloudinary"
+**Fix:** Check browser console for CORS errors and verify:
+1. Backend environment variables have correct Cloudinary credentials
+2. Backend CORS is configured to allow frontend domain
+3. Test Cloudinary credentials by uploading manually on Cloudinary dashboard
+4. Check Vercel Function Logs for any upload errors
+
+### Issue: "Image upload fails"
+**Fix:** Multiple possible causes:
+1. **CORS Error**: Backend CORS must allow your frontend domain
+2. **Cloudinary Credentials**: Verify all 3 env vars are correct in Vercel
+3. **File Size**: Free tier has limits (10MB default)
+4. **Check Logs**: Go to Backend project → Deployments → Function Logs
+
 ### Issue: "Application Error"
 **Fix:** Check Vercel logs:
 1. Go to project → Deployments
