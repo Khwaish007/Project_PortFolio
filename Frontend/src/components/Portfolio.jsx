@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 import { Link } from 'react-router-dom';
 import ProjectDetailModal from './ProjectDetailModal';
 
@@ -153,7 +154,7 @@ const Portfolio = () => {
 
   const fetchCompletedProjects = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/api/projects/completed');
+      const response = await axios.get(`${API_BASE_URL}/api/projects/completed`);
       setCompletedProjects(response.data);
     } catch (err) {
       setError('Failed to fetch projects. Please try again later.');

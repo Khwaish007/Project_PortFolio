@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 import { 
   EnvelopeIcon, 
   PhoneIcon, 
@@ -41,7 +42,7 @@ const ContactUs = () => {
     e.preventDefault();
     setStatus({ submitted: false, loading: true, error: '' });
     try {
-      await axios.post('http://localhost:5001/api/contact', formData);
+      await axios.post(`${API_BASE_URL}/api/contact`, formData);
       setStatus({ submitted: true, loading: false, error: '' });
     } catch (err) {
       setStatus({ 

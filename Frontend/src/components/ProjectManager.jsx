@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 import ProjectDetailModal from './ProjectDetailModal';
 import BlogEditor from './BlogEditor';
 import FileUpload from './FileUpload'; // Import FileUpload
@@ -618,7 +619,7 @@ const ProjectManager = () => {
 
   const fetchBlogPosts = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/api/blogs/all');
+      const response = await axios.get(`${API_BASE_URL}/api/blogs/all`);
       setBlogPosts(response.data);
     } catch (err) {
       setError('Failed to fetch blog posts');
@@ -628,9 +629,9 @@ const ProjectManager = () => {
   const handleSavePost = async (postData) => {
     try {
       if (postData._id) {
-        await axios.put(`http://localhost:5001/api/blogs/${postData._id}`, postData);
+        await axios.put(`${API_BASE_URL}/api/blogs/${postData._id}`, postData);
       } else {
-        await axios.post('http://localhost:5001/api/blogs', postData);
+        await axios.post(`${API_BASE_URL}/api/blogs`, postData);
       }
       fetchBlogPosts();
       setIsEditorOpen(false);
@@ -643,7 +644,7 @@ const ProjectManager = () => {
   const handleDeletePost = async (postId) => {
     if (window.confirm('Are you sure you want to delete this post? This cannot be undone.')) {
       try {
-        await axios.delete(`http://localhost:5001/api/blogs/${postId}`);
+        await axios.delete(`${API_BASE_URL}/api/blogs/${postId}`);
         fetchBlogPosts();
       } catch (err) {
         setError('Failed to delete post.');
@@ -684,7 +685,7 @@ const ProjectManager = () => {
   const fetchProjects = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:5001/api/projects');
+      const response = await axios.get(`${API_BASE_URL}/api/projects`);
       setProjects(response.data);
     } catch (err) {
       setError('Failed to fetch projects');
@@ -713,7 +714,7 @@ const ProjectManager = () => {
     }
 
     try {
-      await axios.put(`http://localhost:5001/api/projects/${projectId}/status`, payload);
+      await axios.put(`${API_BASE_URL}/api/projects/${projectId}/status`, payload);
       // If successful, we don't need to do anything as the UI is already updated.
       // For a declined project, we might want to refetch to be sure.
       if (newStatus === 'declined') {

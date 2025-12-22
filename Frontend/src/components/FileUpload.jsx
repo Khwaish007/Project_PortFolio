@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 import { UploadCloud, Loader2, XCircle } from 'lucide-react';
 
 const FileUpload = ({ onUpload, multiple = false }) => {
@@ -17,11 +18,11 @@ const FileUpload = ({ onUpload, multiple = false }) => {
     try {
       if (multiple) {
         acceptedFiles.forEach(file => formData.append('files', file));
-        const res = await axios.post('http://localhost:5001/api/upload-multiple', formData);
+        const res = await axios.post(`${API_BASE_URL}/api/upload-multiple`, formData);
         onUpload(res.data.urls); // Pass array of URLs
       } else {
         formData.append('file', acceptedFiles[0]);
-        const res = await axios.post('http://localhost:5001/api/upload', formData);
+        const res = await axios.post(`${API_BASE_URL}/api/upload`, formData);
         onUpload([res.data.url]); // Pass array with single URL
       }
     } catch (err) {
