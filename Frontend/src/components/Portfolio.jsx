@@ -156,8 +156,11 @@ const Portfolio = () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/api/projects/completed`);
       setCompletedProjects(response.data);
+      setError(''); // Clear any previous errors
     } catch (err) {
+      console.error('Failed to fetch projects:', err);
       setError('Failed to fetch projects. Please try again later.');
+      // Don't crash the app, just show error
     } finally {
       setLoading(false);
     }
