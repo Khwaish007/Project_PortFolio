@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const menuRef = useRef(null);
 
   // Close menu on route change
@@ -31,8 +32,42 @@ const Navbar = () => {
         : 'text-gray-300 hover:bg-gray-700 hover:text-white'
     }`;
 
+  const handleOurWorkClick = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+    if (location.pathname === '/' || location.pathname === '/portfolio') {
+      // Already on home page, just scroll
+      const projectsSection = document.getElementById('projects-section');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to home page, then scroll
+      navigate('/');
+      setTimeout(() => {
+        const projectsSection = document.getElementById('projects-section');
+        if (projectsSection) {
+          projectsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+    if (location.pathname === '/' || location.pathname === '/portfolio') {
+      // Already on home page, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Navigate to home page
+      navigate('/');
+    }
+  };
+
   const navLinks = [
-    { to: "/portfolio", text: "Our Work" },
+    { to: "/", text: "Home", onClick: handleHomeClick },
+    { to: "#our-work", text: "Our Work", onClick: handleOurWorkClick },
     { to: "/about", text: "About Us" },
     { to: "/blogs", text: "Blogs" },
     { to: "/contact", text: "Contact" },
@@ -87,14 +122,26 @@ const Navbar = () => {
             >
               <div className="p-2" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                 {navLinks.map((link) => (
-                  <NavLink
-                    key={link.to}
-                    to={link.to}
-                    className={navLinkClasses}
-                    role="menuitem"
-                  >
-                    {link.text}
-                  </NavLink>
+                  link.onClick ? (
+                    <a
+                      key={link.to}
+                      href={link.to}
+                      onClick={link.onClick}
+                      className="block px-4 py-3 rounded-md text-base font-medium transition-colors duration-300 text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer"
+                      role="menuitem"
+                    >
+                      {link.text}
+                    </a>
+                  ) : (
+                    <NavLink
+                      key={link.to}
+                      to={link.to}
+                      className={navLinkClasses}
+                      role="menuitem"
+                    >
+                      {link.text}
+                    </NavLink>
+                  )
                 ))}
               </div>
             </div>

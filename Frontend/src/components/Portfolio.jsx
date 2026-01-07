@@ -261,7 +261,7 @@ const Portfolio = () => {
       </section>
 
       {/* Portfolio/Work Section */}
-      <section ref={projectsSectionRef} className="relative py-20 px-4 bg-gray-800/50">
+      <section id="projects-section" ref={projectsSectionRef} className="relative py-20 px-4 bg-gray-800/50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
