@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 import { CalendarDaysIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 
 const Blogs = () => {
@@ -11,7 +12,7 @@ const Blogs = () => {
     const fetchPosts = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:5001/api/blogs');
+        const response = await axios.get(`${API_BASE_URL}/api/blogs`);
         setPosts(response.data);
       } catch (error) {
         console.error("Failed to fetch posts", error);
