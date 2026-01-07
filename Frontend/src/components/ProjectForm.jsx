@@ -17,7 +17,8 @@ import {
   PaperClipIcon
 } from '@heroicons/react/24/solid';
 
-import FileUpload from './FileUpload'; 
+import FileUpload from './FileUpload';
+import Navbar from './Navbar'; 
 
 
 // Enhanced Loader with rotating elements
@@ -71,9 +72,14 @@ const SuccessPrompt = ({ onReset }) => {
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-green-900 to-gray-900 flex items-center justify-center z-50 p-4">
-      {/* Confetti Effect */}
-      {showConfetti && (
+    <div className="fixed inset-0 bg-gray-900 dark:bg-gradient-to-br dark:from-gray-900 dark:via-green-900 dark:to-gray-900 flex flex-col z-50">
+      {/* Navbar */}
+      <Navbar />
+      
+      {/* Success Content */}
+      <div className="flex-1 flex items-center justify-center p-4">
+        {/* Confetti Effect */}
+        {showConfetti && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {[...Array(50)].map((_, i) => (
             <div
@@ -133,6 +139,7 @@ const SuccessPrompt = ({ onReset }) => {
           </span>
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
+      </div>
       </div>
     </div>
   );
@@ -350,7 +357,7 @@ const ProjectForm = () => {
   return (
     <>
       {status.loading && <FullScreenLoader />}
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 relative overflow-hidden">
+      <div className="min-h-screen bg-gray-900 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 relative overflow-hidden">
         <FloatingShapes />
         <ServiceIcons />
         

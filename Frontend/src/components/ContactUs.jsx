@@ -55,8 +55,8 @@ const ContactUs = () => {
 
   if (status.submitted) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center text-center px-4">
-        <div className="bg-gray-800/50 p-12 rounded-2xl border border-gray-700/50">
+      <div className="min-h-screen bg-gray-900 dark:bg-gray-900 flex items-center justify-center text-center px-4">
+        <div className="bg-gray-800/50 dark:bg-gray-800/50 p-12 rounded-2xl border border-gray-700/50">
           <CheckCircleIcon className="w-16 h-16 text-green-400 mx-auto mb-4" />
           <h2 className="text-3xl font-bold text-white mb-2">Thank You!</h2>
           <p className="text-gray-300">Your message has been sent. We'll get back to you shortly.</p>
@@ -66,7 +66,7 @@ const ContactUs = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 py-20 px-4">
+    <div className="min-h-screen bg-gray-900 dark:bg-gradient-to-br dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text mb-4">
